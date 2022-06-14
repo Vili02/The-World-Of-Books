@@ -7,14 +7,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TheWorldOfTheBooks.Data.Models
 {
-    internal class Author : BaseModel
+    public class Author : BaseModel
     {
         public Author()
         {
-            this.Books = new HashSet<Books>();
+            this.Books = new HashSet<Book>();
         }
         [Required]
         public string Name { get; set; }
-        public ICollection<Books> Books { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }

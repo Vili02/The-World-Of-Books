@@ -7,15 +7,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TheWorldOfTheBooks.Data.Models
 {
-    internal class Genre: BaseModel
+    public class Genre: BaseModel
     {
         public Genre()
         {
             this.Id = Guid.NewGuid();
-            this.Books = new HashSet<Books>();
+            this.Books = new HashSet<Book>();
         }
         [Required]
         public string Title { get; set; }
-        public ICollection<Books> Books { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }

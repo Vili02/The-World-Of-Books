@@ -7,9 +7,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TheWorldOfTheBooks.Data.Models
 {
-    internal class Books : BaseModel
+    public class Book : BaseModel
     {
-        public Books()
+        public Book()
         {
         }
         [Required]
@@ -26,7 +26,7 @@ namespace TheWorldOfTheBooks.Data.Models
         public int PageCount { get; set; }
         [Required]
         public Guid GenreId { get; set; }
-        public Guid AthorId { get; set; }
+        public Guid AuthorId { get; set; }
         public Genre Genre { get; set; }
         public Author Author { get; set; }
     }
