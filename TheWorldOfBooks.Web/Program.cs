@@ -11,8 +11,10 @@ builder.Services.AddDbContext<TheWorldOfBooksContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+
 builder.Services.AddDefaultIdentity<User>()
-    .AddEntityFrameworkStores<TheWorldOfBooksContext>();
+                .AddEntityFrameworkStores<TheWorldOfBooksContext>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
