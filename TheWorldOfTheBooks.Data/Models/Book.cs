@@ -23,8 +23,6 @@ namespace TheWorldOfTheBooks.Data.Models
         [Required]
         public string Pages { get; set; }
         [Required]
-        public int PageCount { get; set; }
-        [Required]
         public Guid GenreId { get; set; }
         public Guid AuthorId { get; set; }
         public Genre Genre { get; set; }
