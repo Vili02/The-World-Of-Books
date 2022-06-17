@@ -1,8 +1,5 @@
 ﻿@model TheWorldOfTheBooks.Data.Models.Book
 
-@{
-    ViewData["Title"] = "Create";
-}
 
 <h1>Add book</h1>
 
@@ -52,12 +49,12 @@
 
             <div class="form-group">
                 <label asp-for="GenreId" class="control-label">Genre</label>
-                <select asp-for="GenreId" class="form-control" asp-items="ViewBag.GenreId"></select>
+                <select asp-for="GenreId" class="form-control" asp-items="@ViewBag.GenreId"></select>
             </div>
 
             <div class="form-group">
-                <label asp-for="AuthorId" class="control-label">Author</label>
-                <select asp-for="AuthorId" class="form-control" asp-items="ViewBag.AuthorId"></select>
+                <label asp-for="AuthorName" class="control-label">Author</label>
+                <input asp-for="AuthorName" class="form-control" />
             </div>
 
 

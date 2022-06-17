@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheWorldOfTheBooks.Data;
 
@@ -11,9 +12,10 @@ using TheWorldOfTheBooks.Data;
 namespace TheWorldOfTheBooks.Data.Migrations
 {
     [DbContext(typeof(TheWorldOfBooksContext))]
-    partial class TheWorldOfBooksContextModelSnapshot : ModelSnapshot
+    [Migration("20220617210328_DropAuthors")]
+    partial class DropAuthors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -65,18 +65,12 @@ namespace TheWorldOfBooks.Web.Controllers
         // POST: Books/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")] // allows only admins to create books
-        public async Task<IActionResult> Create([Bind("Title,Description,ImageURL,Published,Pages,PageCount,GenreId,AuthorId")] Book book)
+        public async Task<IActionResult> Create([Bind("Title,Description,ImageURL,Published,Pages,GenreId,AuthorName")] Book book)
         {
-            if (ModelState.IsValid)
-            {
-                book.Id = Guid.NewGuid();
-                _context.Add(book);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "Id,Title", book.GenreId.ToString()) ;
-            return View(book);
+            book.Id = new Guid();
+            _context.Add(book);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Books/Edit/5
@@ -101,35 +95,26 @@ namespace TheWorldOfBooks.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Title,Description,ImageURL,Published,Pages,PageCount,GenreId,AuthorId")] Book book)
+        public async Task<IActionResult> Edit(Book book)
         {
-            if (id != book.Id)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BookExists(book.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                _context.Update(book);
+                await _context.SaveChangesAsync();
             }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "Title", book.GenreId);
-            return View(book);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BookExists(book.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Books/Delete/5

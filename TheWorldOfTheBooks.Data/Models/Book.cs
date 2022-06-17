@@ -15,6 +15,7 @@ namespace TheWorldOfTheBooks.Data.Models
         [Required]
         public string Title { get; set; }
         [Required]
+        [MinLength(50)]
         public string Description { get; set; }
         [Required]
         public string ImageURL { get; set; }
@@ -24,8 +25,7 @@ namespace TheWorldOfTheBooks.Data.Models
         public string Pages { get; set; }
         [Required]
         public Guid GenreId { get; set; }
-        public Guid AuthorId { get; set; }
         public Genre Genre { get; set; }
-        public Author Author { get; set; }
+        public string AuthorName { get; set; }
     }
 }
