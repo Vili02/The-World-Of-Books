@@ -12,21 +12,21 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TheWorldOfBooks.Web.Controllers
 {
-    public class BookController : Controller
+    public class BooksController : Controller
     {
         private readonly TheWorldOfBooksContext _context;
-        public BookController(TheWorldOfBooksContext context)
+        public BooksController(TheWorldOfBooksContext context)
         {
             _context = context;
 
         }
 
         // GET: Books
-        public async Task<IActionResult> Index(string? errorMessage)
+        public IActionResult Index(string? errorMessage)
         {
             ViewBag.ErrorMessage = errorMessage;
             var TheWorldOfBooksContext = _context.Books.Include(c => c.Genre);
-            return View(await TheWorldOfBooksContext.ToListAsync());
+            return View(TheWorldOfBooksContext.ToList());
         }
 
         // GET: Books/Details/5
@@ -54,7 +54,8 @@ namespace TheWorldOfBooks.Web.Controllers
         }
 
         // GET: Books/Create
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "Title");

@@ -12,11 +12,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TheWorldOfBooks.Web.Controllers
 {
-    public class GenreController : Controller
+    public class GenresController : Controller
     {
         private readonly TheWorldOfBooksContext _context;
         
-        public GenreController(TheWorldOfBooksContext context)
+        public GenresController(TheWorldOfBooksContext context)
         {
             _context = context;
         }

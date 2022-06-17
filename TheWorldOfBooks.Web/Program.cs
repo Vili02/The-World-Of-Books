@@ -20,6 +20,11 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<TheWorldOfBooksContext>();
+    GenreSeed.Seed(dbContext);
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
