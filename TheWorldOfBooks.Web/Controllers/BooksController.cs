@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TheWorldOfBooks.Web.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private readonly TheWorldOfBooksContext _context;
@@ -21,7 +22,7 @@ namespace TheWorldOfBooks.Web.Controllers
 
         }
 
-        // GET: Books
+        [AllowAnonymous]
         public IActionResult Index(string? errorMessage)
         {
             ViewBag.ErrorMessage = errorMessage;
@@ -29,7 +30,7 @@ namespace TheWorldOfBooks.Web.Controllers
             return View(TheWorldOfBooksContext.ToList());
         }
 
-        // GET: Books/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(Guid? id, string? errorMessage)
         {
             try
@@ -53,16 +54,12 @@ namespace TheWorldOfBooks.Web.Controllers
             }
         }
 
-        // GET: Books/Create
-        //[Authorize(Roles = "Administrator")]
-        [Authorize]
         public IActionResult Create()
         {
             ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "Title");
             return View();
         }
 
-        // POST: Books/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Title,Description,ImageURL,Published,Pages,GenreId,AuthorName")] Book book)
@@ -73,8 +70,6 @@ namespace TheWorldOfBooks.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Books/Edit/5
-        [Authorize]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -91,10 +86,8 @@ namespace TheWorldOfBooks.Web.Controllers
             return View(book);
         }
 
-        // POST: Books/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> Edit(Book book)
         {
 
@@ -117,8 +110,6 @@ namespace TheWorldOfBooks.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Books/Delete/5
-        [Authorize]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -137,10 +128,8 @@ namespace TheWorldOfBooks.Web.Controllers
             return View(book);
         }
 
-        // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var book = await _context.Books.FindAsync(id);

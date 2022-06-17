@@ -24,6 +24,8 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<TheWorldOfBooksContext>();
     GenreSeed.Seed(dbContext);
+    DbInitializer.RoleSeeding(dbContext);
+    DbInitializer.AdminSeeding(scope.ServiceProvider.GetRequiredService<UserManager<User>>());
 }
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

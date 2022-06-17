@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TheWorldOfBooks.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class GenresController : Controller
     {
         private readonly TheWorldOfBooksContext _context;
@@ -56,7 +57,7 @@ namespace TheWorldOfBooks.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Create([Bind("Name,Id")] Genre genre)
+        public async Task<IActionResult> Create([Bind("Title,Id")] Genre genre)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +90,7 @@ namespace TheWorldOfBooks.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Name,Id")] Genre genre)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Title,Id")] Genre genre)
         {
             if (id != genre.Id)
             {
